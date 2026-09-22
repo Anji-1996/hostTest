@@ -1,0 +1,43 @@
+/* ============================================================
+   RESPONSIVE
+   Strategy: on tablet the two-column layouts collapse to one
+   column. On mobile, the pinned "walking" story shrinks to a
+   shorter pin distance and the character scales down; the same
+   pose sequence still plays (wave -> walk -> sit -> type ->
+   stand -> walk -> gesture), it's just more compact.
+   ============================================================ */
+
+@media (max-width: 1080px) {
+  .contact-inner { grid-template-columns: 1fr; }
+  .projects-guide { display: none; }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 6rem;
+    text-align: left;
+  }
+  .hero-stage-frame { min-height: 46svh; order: -1; }
+  .hero-copy { padding-top: 1rem; }
+
+  .stage-wrapper { height: 340vh; }
+  .character-anchor { width: 150px; left: 50%; }
+  .desk-scene { width: 82vw; }
+
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-card:nth-child(even) { margin-top: 0; }
+
+  .contact-character { display: none; }
+}
+
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .hero-copy h1 { font-size: 2.4rem; }
+  .stage-wrapper { height: 300vh; }
+  .character-anchor { width: 120px; }
+  .monitor { width: 160px; height: 110px; }
+  .stage-caption { top: 8%; }
+  .contact-section { padding: 6rem 5vw 4rem; border-radius: 20px 20px 0 0; }
+  .contact-form { padding: 1.6rem; }
+}

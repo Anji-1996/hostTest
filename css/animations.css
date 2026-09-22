@@ -1,0 +1,58 @@
+/* ============================================================
+   Lightweight CSS keyframes for ambient/idle motion.
+   Scroll-driven storytelling animation lives in JS (GSAP),
+   this file only covers small looping details that don't
+   need to be scroll-synced (breathing, blinking, cursor).
+   ============================================================ */
+
+@keyframes idleBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+
+@keyframes cursorBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.code-cursor { animation: cursorBlink 1s step-end infinite; }
+
+.is-idle .char-torso-group { animation: idleBob 3.4s ease-in-out infinite; }
+.eye-blink { animation: blink 4.6s infinite; transform-box: fill-box; transform-origin: 50% 50%; }
+
+/* ============================================================
+   REDUCED MOTION
+   When the visitor prefers reduced motion, we disable pinning,
+   scroll-scrubbed timelines and continuous loops. Content still
+   reveals with a single gentle fade so the story is still told,
+   just without the scroll-scrubbed choreography.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .is-idle .char-torso-group,
+  .eye-blink,
+  .scroll-cue .mouse::after,
+  .code-cursor {
+    animation: none !important;
+  }
+
+  .stage-wrapper { height: auto !important; }
+  .stage { position: relative !important; height: auto !important; padding: 5rem 0; }
+  .stage-caption-item,
+  .desk-scene,
+  .tech-tag,
+  .project-card,
+  .contact-character,
+  .contact-form {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .character-anchor { position: relative !important; left: 50% !important; transform: translateX(-50%) !important; margin: 2rem 0; }
+}
+
+/* Body class toggled by JS once GSAP/ScrollTrigger confirms reduced motion */
+.reduced-motion .stage-wrapper { height: auto; }
+.reduced-motion .stage { position: relative; height: auto; padding: 5rem 0; }
